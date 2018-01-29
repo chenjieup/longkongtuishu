@@ -3,7 +3,7 @@ import numpy as np
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import re
-df = pd.read_csv('F:\longkong\.idea\he.csv',encoding="gbk",low_memory=False)
+df = pd.read_csv('F:\longkongtuishu\.idea\he.csv',encoding="gbk",low_memory=False)
 obj = pd.DataFrame(df)
 lie = obj.columns
 '''
@@ -44,7 +44,7 @@ print(obj)#数据表还有5818行数据
 因为乱码内容，是由于抓取数据时，匹配不严格，乱码多为href标签网址。
 '''
 for i in obj['name']:
-    if re.search('href',str(i)) is not None:
+    if re.search('href',str(i)) or re.search('span',str(i)) is not None :
         obj = obj[(True-df['name'].isin([i]))]
 print(obj)#异常值处理完毕，数据表内容还有5682行。
 '''
@@ -67,5 +67,5 @@ print(obj)#数据表重新建立索引，共5682行。
 '''
 重新存储为csv文件。
 '''
-obj.to_csv('F:\longkong\shuju.csv')
+obj.to_csv('F:\longkongtuishu\shuju.csv')
 
